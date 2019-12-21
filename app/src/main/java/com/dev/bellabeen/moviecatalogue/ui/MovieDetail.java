@@ -2,15 +2,21 @@ package com.dev.bellabeen.moviecatalogue.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.dev.bellabeen.moviecatalogue.R;
+import com.dev.bellabeen.moviecatalogue.model.Movie;
+
+import java.util.ArrayList;
 
 public class MovieDetail extends AppCompatActivity {
     ImageView imgPoster;
+    String title, genre, overview, status, original_language, runtime, budget, revenue, poster;
     TextView tvTitle, tvGenre, tvOverview, tvStatus, tvOriginal_Language, tvRuntime, tvBudget, tvRevenue;
 
     @Override
@@ -18,20 +24,22 @@ public class MovieDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
+
         //get data Intent dari Activity
-        final String dtTitle = getIntent().getExtras().getString("iTitle");
-        final String dtGenre = getIntent().getExtras().getString("iGenre");
-        final String dtPoster = getIntent().getExtras().getString("iPoster");
-        final String dtOverview = getIntent().getExtras().getString("iOverview");
-        final String dtStatus = getIntent().getExtras().getString("iStatus");
-        final String dtOriginal_Language = getIntent().getExtras().getString("iOriginal_Language");
-        final String dtRuntime = getIntent().getExtras().getString("iRuntime");
-        final String dtBudget = getIntent().getExtras().getString("iBudget");
-        final String dtRevenue = getIntent().getExtras().getString("iRevenue");
+        Intent intent = getIntent();
+        Movie movie = intent.getParcelableExtra("Model");
+        String title = movie.getTitle();
+        String genre = movie.getGenre();
+        String overview = movie.getOverview();
+        String status = movie.getStatus();
+        String original_language = movie.getOriginal_language();
+        String runtime = movie.getRuntime();
+        String budget = movie.getBudget();
+        String revenue = movie.getRevenue();
+
 
 
         //set id data
-        imgPoster = findViewById(R.id.img_poster);
         tvTitle = findViewById(R.id.tv_title);
         tvGenre = findViewById(R.id.tv_genre);
         tvOverview = findViewById(R.id.tv_overview);
@@ -40,20 +48,21 @@ public class MovieDetail extends AppCompatActivity {
         tvRuntime = findViewById(R.id.tv_runtime);
         tvBudget = findViewById(R.id.tv_budget);
         tvRevenue = findViewById(R.id.tv_revenue);
+        imgPoster = findViewById(R.id.img_poster);
+
 
         //setText Data
-        tvTitle.setText(dtTitle);
-        tvGenre.setText(dtGenre);
-        tvOverview.setText(dtOverview);
-        tvStatus.setText(dtStatus);
-        tvOriginal_Language.setText(dtOriginal_Language);
-        tvRuntime.setText(dtRuntime);
-        tvBudget.setText(dtBudget);
-        tvRevenue.setText(dtRevenue);
+        tvTitle.setText(title);
+        tvGenre.setText(genre);
+        tvOverview.setText(overview);
+        tvStatus.setText(status);
+        tvOriginal_Language.setText(original_language);
+        tvRuntime.setText(runtime);
+        tvBudget.setText(budget);
+        tvRevenue.setText(revenue);
 
-        //set Load Gambar
         Glide.with(this)
-                .load(dtPoster)
+                .load(movie.getPoster())
                 .into(imgPoster);
 
     }
