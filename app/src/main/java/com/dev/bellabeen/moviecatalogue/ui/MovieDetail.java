@@ -16,13 +16,26 @@ import java.util.ArrayList;
 
 public class MovieDetail extends AppCompatActivity {
     ImageView imgPoster;
-    String title, genre, overview, status, original_language, runtime, budget, revenue, poster;
     TextView tvTitle, tvGenre, tvOverview, tvStatus, tvOriginal_Language, tvRuntime, tvBudget, tvRevenue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+
+
+        tvTitle = findViewById(R.id.textView);
+        tvGenre = findViewById(R.id.textView2);
+        tvOverview= findViewById(R.id.textView8);
+        tvStatus = findViewById(R.id.textView3);
+        tvOriginal_Language = findViewById(R.id.textView5);
+        tvRuntime = findViewById(R.id.textView6);
+        tvBudget = findViewById(R.id.textView4);
+        tvRevenue = findViewById(R.id.textView7);
+//        tvType = findViewById(R.id.textView9);
+//        tvCreator = findViewById(R.id.textView10);
+
+
 
 
         //get data Intent dari Activity

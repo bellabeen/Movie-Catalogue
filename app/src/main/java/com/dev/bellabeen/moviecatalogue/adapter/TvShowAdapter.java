@@ -14,35 +14,37 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.dev.bellabeen.moviecatalogue.model.Movie;
-import com.dev.bellabeen.moviecatalogue.ui.MovieDetail;
 import com.dev.bellabeen.moviecatalogue.R;
+import com.dev.bellabeen.moviecatalogue.model.Movie;
+import com.dev.bellabeen.moviecatalogue.model.TvShows;
+import com.dev.bellabeen.moviecatalogue.ui.MovieDetail;
+import com.dev.bellabeen.moviecatalogue.ui.TvShowDetail;
 
 import java.util.ArrayList;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CategoryViewHolder> {
+public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.CategoryViewHolder> {
 
-    public MovieAdapter(Context context){
+    public TvShowAdapter(Context context){
         this.context = context;
     }
 
     private Context context;
 
-    public ArrayList<Movie> getListMovie(){
-        return listmovie;
+    public ArrayList<TvShows> getListTvShow(){
+        return listtvshow;
     }
 
-    public void setListMovie(ArrayList<Movie> listMovie){
-        this.listmovie = listMovie;
+    public void setListTvShow(ArrayList<TvShows> listTvShow){
+        this.listtvshow = listTvShow;
     }
 
-    private ArrayList<Movie> listmovie;
+    private ArrayList<TvShows> listtvshow;
 
 
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemRow = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_movie, viewGroup, false);
+        View itemRow = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_tvshow, viewGroup, false);
         return new CategoryViewHolder(itemRow);
     }
 
@@ -50,9 +52,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CategoryView
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder categoryViewHolder, final int position) {
 
-        final String title = getListMovie().get(position).getTitle();
-        final String poster = getListMovie().get(position).getPoster();
-        final String genre = getListMovie().get(position).getGenre();
+        final String title = getListTvShow().get(position).getTitle();
+        final String poster = getListTvShow().get(position).getPoster();
+        final String genre = getListTvShow().get(position).getGenre();
 
 
         categoryViewHolder.tvTitle.setText(title);
@@ -67,8 +69,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CategoryView
         categoryViewHolder.relative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, MovieDetail.class);
-                intent.putExtra("Model", listmovie.get(position));
+                Intent intent = new Intent(context, TvShowDetail.class);
+                intent.putExtra("Model", listtvshow.get(position));
                 context.startActivity(intent);
             }
         });
@@ -78,12 +80,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CategoryView
 
     @Override
     public int getItemCount() {
-        return getListMovie().size();
+        return getListTvShow().size();
     }
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout relative;
-        TextView tvTitle, tvGenre, tvOverview, tvStatus, tvOriginal_Language, tvRuntime, tvBudget, tvRevenue;
+        TextView tvTitle, tvGenre, tvOverview;
         ImageView imgPoster;
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);

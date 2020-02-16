@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MoCat</string>
+    <string name="tab_text_1">Film</string>
+    <string name="tab_text_2">TVSeries</string>
+    <string name="poster">Poster</string>
+    <string name="title">Judul</string>
+    <string name="content_of_title">Konten dari Judul</string>
+    <string name="content_of_genre">Konten dari Aliran</string>
+    <string name="genre">Aliran</string>
+    <string name="content_of_status">Konten dari Status</string>
+    <string name="content_of_language">Konten dari Bahasa</string>
+    <string name="content_of_runtime">Durasi</string>
+    <string name="content_of_type">Konten dari Tipe</string>
+    <string name="type">Tipe</string>
+    <string name="creator">Pembuat</string>
+    <string name="content_of_creator">Konten dari Pembuat</string>
+    <string name="overview">Gambaran</string>
+    <string name="content_of_overview">Konten dari Gambaran</string>
+    <string name="change_language_settings">Ubah Pengaturan Bahasa</string>
+    <string name="budget">Biaya</string>
+    <string name="revenue">Pendapatan</string>
+    <string name="status">Status</string>
+    <string name="language">Bahasa</string>
+    <string name="runtime">Durasi</string>
+</resources>
+
+
+
