@@ -22,78 +22,69 @@ import com.dev.bellabeen.moviecatalogue.ui.TvShowDetail;
 
 import java.util.ArrayList;
 
-public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.CategoryViewHolder> {
+public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ListViewHolder> {
+    private OnItemClickCallback onItemClickCallback;
+    private ArrayList<TvShows> mData = new ArrayList<>();
 
-    public TvShowAdapter(Context context){
-        this.context = context;
+    public void setData(ArrayList<TvShows> items) {
+        mData.clear();
+        mData.addAll(items);
+        notifyDataSetChanged();
     }
 
-    private Context context;
-
-    public ArrayList<TvShows> getListTvShow(){
-        return listtvshow;
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
     }
-
-    public void setListTvShow(ArrayList<TvShows> listTvShow){
-        this.listtvshow = listTvShow;
-    }
-
-    private ArrayList<TvShows> listtvshow;
-
 
     @NonNull
     @Override
-    public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemRow = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_tvshow, viewGroup, false);
-        return new CategoryViewHolder(itemRow);
+    public ListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_tvshow, viewGroup, false);
+        return new ListViewHolder(view);
     }
 
-
     @Override
-    public void onBindViewHolder(@NonNull CategoryViewHolder categoryViewHolder, final int position) {
-
-        final String title = getListTvShow().get(position).getTitle();
-        final String poster = getListTvShow().get(position).getPoster();
-        final String genre = getListTvShow().get(position).getGenre();
-
-
-        categoryViewHolder.tvTitle.setText(title);
-        categoryViewHolder.tvGenre.setText(genre);
-
-        Glide.with(context)
-                .load(poster)
-                .apply(new RequestOptions().override(55, 55))
-                .into(categoryViewHolder.imgPoster);
-
-
-        categoryViewHolder.relative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, TvShowDetail.class);
-                intent.putExtra("Model", listtvshow.get(position));
-                context.startActivity(intent);
-            }
-        });
+    public void onBindViewHolder(@NonNull final ListViewHolder holder, int position) {
+        holder.bind(mData.get(position));
 
     }
 
 
     @Override
     public int getItemCount() {
-        return getListTvShow().size();
+        return mData.size();
     }
 
-    public class CategoryViewHolder extends RecyclerView.ViewHolder {
-        RelativeLayout relative;
-        TextView tvTitle, tvGenre, tvOverview;
-        ImageView imgPoster;
-        public CategoryViewHolder(@NonNull View itemView) {
+    public class ListViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView tvJudul, tvRilis, tvRating, tvDeskripsi;
+        private ImageView imgPhoto;
+
+        public ListViewHolder(@NonNull View itemView) {
             super(itemView);
-            relative = itemView.findViewById(R.id.relative);
-            tvTitle = itemView.findViewById(R.id.tv_title);
-            imgPoster = itemView.findViewById(R.id.img_poster);
-            tvGenre = itemView.findViewById(R.id.tv_genre);
-            tvOverview = itemView.findViewById(R.id.tv_overview);
+            tvJudul = itemView.findViewById(R.id.tv_judul);
+            tvRilis = itemView.findViewById(R.id.tv_rilis);
+            tvRating = itemView.findViewById(R.id.tv_rating);
+            tvDeskripsi = itemView.findViewById(R.id.tv_deskripsi);
+            imgPhoto = itemView.findViewById(R.id.img_poster);
         }
+
+        void bind(TvShows tvShows) {
+
+            tvJudul.setText(tvShows.getJudul());
+            tvRilis.setText(tvShows.getTanggal());
+            Glide.with(itemView.getContext()).load(tvShows.getPoster()).into(imgPhoto);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickCallback.onItemClicked(mData.get(getAdapterPosition()));
+                }
+            });
+        }
+    }
+
+    public interface OnItemClickCallback {
+        void onItemClicked(TvShows data);
     }
 }
