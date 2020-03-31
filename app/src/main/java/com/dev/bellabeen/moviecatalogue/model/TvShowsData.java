@@ -28,7 +28,8 @@ public class TvShowsData extends ViewModel {
     public void setListTvShow() {
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<TvShows> listItemTvShows = new ArrayList<>();
-        String url = "https://api.themoviedb.org/3/discover/tv?api_key=dba7100ddaff47a7f37e8d8e6622d6a0&language=en-US" + API_KEY;
+//        https://api.themoviedb.org/3/tv/popular?api_key=c49905b44c6b290a1922a3adccd90f94&language=en-US
+        String url = " https://api.themoviedb.org/3/discover/tv?api_key=c49905b44c6b290a1922a3adccd90f94&language=en-US";
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

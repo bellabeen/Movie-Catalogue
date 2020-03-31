@@ -27,7 +27,10 @@ public class MovieData extends ViewModel {
     public void setListMovie(){
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<Movie> listItems = new ArrayList<>();
-        String url = "https://api.themoviedb.org/3/discover/movie?api_key=c49905b44c6b290a1922a3adccd90f94&language=en-US";
+//        https://api.themoviedb.org/3/movie/popular?api_key=c49905b44c6b290a1922a3adccd90f94&language=en-US
+
+
+        String url = " https://api.themoviedb.org/3/discover/movie?api_key=c49905b44c6b290a1922a3adccd90f94&language=en-US";
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
